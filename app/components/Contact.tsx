@@ -84,7 +84,7 @@ const Contact = () => {
                     {/* Address */}
                     <div className="flex gap-3 mt-3 mb-12">
                         <div className="rounded-full bg-orange-100 p-2 text-orange-600 text-3xl justify-center items-center flex">
-                            <IoLocationOutline size={25}/>
+                            <IoLocationOutline size={25} />
                         </div>
                         <div>
                             <h2 className="text-xl font-semibold">Address</h2>
@@ -95,18 +95,18 @@ const Contact = () => {
                     {/* Phone */}
                     <div className="flex gap-3 mb-12">
                         <div className="rounded-full bg-orange-100 p-2 text-orange-600 text-3xl justify-center items-center flex">
-                            <IoCallOutline size={25}/>
+                            <IoCallOutline size={25} />
                         </div>
                         <div>
                             <h2 className="text-xl font-semibold">Call Us</h2>
-                            <p className="text-sm text-slate-800">+91 1122334455</p>
+                            <p className="text-sm text-slate-800">+91 6385226198</p>
                         </div>
                     </div>
 
                     {/* Email */}
                     <div className="flex gap-3 mb-12 cursor-pointer">
                         <div className="rounded-full bg-orange-100 p-2 text-orange-600 text-3xl justify-center items-center flex">
-                            <TfiEmail size={25}/>
+                            <TfiEmail size={25} />
                         </div>
                         <div>
                             <h2 className="text-xl font-semibold">Email Us</h2>

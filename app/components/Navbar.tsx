@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import CtaButton from "../ui/components/CtaButton";
 import logo from "../../public/assets/logo.png";
@@ -11,12 +12,21 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
   const [visible, setVisible] = useState(true);
 
+  const pathname = usePathname();
+  const router = useRouter();
+
   const lastScrollYRef = useRef(0);
 
   const clickHandler = () => setShow(prev => !prev);
 
   // Smooth scroll
   const scrollToSection = (id : any) => {
+    if (pathname !== "/") {
+      router.push(`/#${id}`);
+      setShow(false);
+      return;
+    }
+
     const section = document.getElementById(id);
     if (section) section.scrollIntoView({ behavior: "smooth" });
     setShow(false);

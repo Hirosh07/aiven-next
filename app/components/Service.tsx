@@ -7,24 +7,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useRouter } from "next/navigation";
 import Card from "../ui/components/Card";
-
-const allServices = [
-  { path: "/app-development", title: "Apps Development", desc: "App Development process is like a signature recipe — clean code, intuitive UI, and powerful backend." },
-  { path: "/web-development", title: "Web Development", desc: "Professional web development ensures your site is fast, mobile-responsive, and optimized." },
-  { path: "/campagin-creation", title: "Digital Marketing", desc: "We boost brand awareness and visibility using Meta Ads & Google Ads." },
-  { path: "/advertising", title: "O-O-H Ads", desc: "We deliver powerful outdoor campaigns including metro and billboard ads." },
-  { path: "/cvs", title: "Corporate Video Shoots", desc: "High-quality shoots that showcase your brand identity and culture." },
-  { path: "/trad-ads", title: "Traditional Advertisements", desc: "TV, radio & OTT ads across major platforms." },
-  { path: "/graphics-design", title: "Graphics Design", desc: "We deliver stunning graphic designs that make your brand stand out." },
-  { path: "/ve-mg", title: "Video Editing/Motion Graphics", desc: "High-quality edits and motion graphics to elevate brand presence." },
-  { path: "/Event-management", title: "Event Management", desc: "End-to-end event management from planning to flawless execution." },
-];
+import { servicesData as allServices } from "../data/services";
 
 const Services = () => {
   const router = useRouter();
 
   const [startIndex, setStartIndex] = useState(0);
   const [direction, setDirection] = useState("right");
+  const [animateKey, setAnimateKey] = useState(0);
 
   // FIX 1 → Safe client-only responsive card count
   const [cardsToShow, setCardsToShow] = useState(3);
@@ -49,17 +39,19 @@ const Services = () => {
   const handleMoveRight = () => {
     setDirection("right");
     setStartIndex((prev) => (prev + 1) % allServices.length);
+    setAnimateKey((prev) => prev + 1);
   };
 
   const handleMoveLeft = () => {
     setDirection("left");
     setStartIndex((prev) => (prev - 1 + allServices.length) % allServices.length);
+    setAnimateKey((prev) => prev + 1);
   };
 
   // Build visible cards dynamically
-  const visibleServices = allServices.slice(startIndex, startIndex + cardsToShow);
-  while (visibleServices.length < cardsToShow) {
-    visibleServices.push(allServices[visibleServices.length - allServices.length]);
+  const visibleServices = [];
+  for (let i = 0; i < cardsToShow; i++) {
+    visibleServices.push(allServices[(startIndex + i) % allServices.length]);
   }
 
   return (
@@ -88,7 +80,7 @@ const Services = () => {
         </button>
 
         {/* Cards */}
-        <div className={`grid gap-5 w-full max-w-[1800px] grid-cols-1 sm:grid-cols-1 px-2 lg:grid-cols-3 slide-${direction}`} >
+        <div key={animateKey} className={`grid gap-5 w-full max-w-[1800px] grid-cols-1 sm:grid-cols-1 px-2 lg:grid-cols-3 slide-${direction}`} >
           {visibleServices.map((service) => (
             <div key={service.title} onClick={() => router.push(service.path)}>
               <Card img={<HiOutlineChartPie />} title={service.title} desc={service.desc} />

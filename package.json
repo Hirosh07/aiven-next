@@ -23,8 +23,8 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/aos": "^3.0.7",
-    "@types/node": "^20",
-    "@types/react": "^19",
+    "@types/node": "20.19.25",
+    "@types/react": "19.2.7",
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.8.32",
     "eslint": "^9",
